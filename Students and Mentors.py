@@ -80,11 +80,15 @@ if __name__ == '__main__':
             average_grade_home_work = summ / count
             return average_grade_home_work
 
+        def __gt__(self, other):
+            return self.__average_grade() > other.__average_grade()
+
         def best_student(self, other):
-            if float(self.__average_grade()) > float(other.__average_grade()):
-                return f'{self.surname} - лучший студент'
+            if self.__gt__(other):
+                print(f'{self.surname} - лучший студент')
             else:
-                return f'{other.surname} - лучший студент'
+                print(f'{other.surname} - лучший студент')
+
 
     class Mentor:
         def __init__(self, name, surname):
@@ -118,11 +122,16 @@ if __name__ == '__main__':
             average_grade_lect = summ / count
             return average_grade_lect
 
+
+        def __gt__(self, other):
+            return self.__average_grade() > other.__average_grade()
+
         def best_lector(self, other):
-            if float(self.__average_grade()) > float(other.__average_grade()):
-                return f'{self.surname} - лучший лектор'
+            if self.__gt__(other):
+                print(f'{self.surname} - лучший лектор')
             else:
-                return f'{other.surname} - лучший лектор'
+                print(f'{other.surname} - лучший лектор')
+
 
     class Reviewer(Mentor):
 
@@ -176,7 +185,7 @@ if __name__ == '__main__':
 
     first_student.rate_lect(cool_lector, 'Python', 5)
     first_student.rate_lect(cool_lector, 'Python', 10)
-    first_student.rate_lect(second_lector, 'Python', 8)
+    first_student.rate_lect(second_lector, 'Python', 5)
     first_student.rate_lect(second_lector, 'Python', 9)
 
     print(cool_mentor)
@@ -189,8 +198,8 @@ if __name__ == '__main__':
     print(second_student)
     print()
 
-    print(cool_lector.best_lector(second_lector))
-    print(first_student.best_student(second_student))
+    cool_lector.best_lector(second_lector)
+    first_student.best_student(second_student)
     print()
 
     general_average_students(students,"Python")
